@@ -6,6 +6,19 @@
             <field name="inherit_id" ref="base.view_partner_form"/>
             <field name="arch" type="xml">
 
+                <xpath expr="//field[@name='vat']" position="after">
+                    <field name="complete_profile"/>
+                    <table attrs="{'invisible': [('complete_profile','=',False)]}">
+                        <tr>
+                            <td>
+                                <img src='/cengineer_tp/static/src/img/complete.png' alt="complete_profile"
+                                     style="max-height: 45px;"/>
+                            </td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </xpath>
+
                 <xpath expr="//field[@name='category_id']" position="after">
                     <field name="url_facebook"/>
                     <field name="url_linkedin"/>
