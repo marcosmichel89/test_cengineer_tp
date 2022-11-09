@@ -88,5 +88,16 @@
                 </xpath>
             </field>
         </record>
+
+        <record id="view_res_partner_incomplete_filter" model="ir.ui.view">
+            <field name="name">view.res.partner.incomplete.filter</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_res_partner_filter"/>
+            <field name="arch" type="xml">
+                <xpath expr="//search" position="inside">
+                    <filter name="incomplete" string="Incomplete Profile" domain="[('complete_profile', '=', False)]"/>
+                </xpath>
+            </field>
+        </record>
     </data>
 </odoo>
