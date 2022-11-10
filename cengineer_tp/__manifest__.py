@@ -13,13 +13,14 @@
     'category': "CRM",
     'version': '14.0.0.0.1',
 
-    'depends': ['base', 'crm'],
+    'depends': ['base', 'website_sale', 'crm', 'website', 'portal'],
 
     # always loaded
     'data': [
-        # 'security/ir.model.access.csv',
+        'security/ir.model.access.csv',
+        'data/data.xml',
         'views/views.xml',
-        'views/templates.xml',
+        'views/portal.xml',
     ],
     'license': 'LGPL-3',
 }
