@@ -1,7 +1,4 @@
 from odoo import models, fields, tools
-import logging
-
-_logger = logging.getLogger(__name__)
 
 
 class PartnerRibbon(models.Model):

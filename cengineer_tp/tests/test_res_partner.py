@@ -1,9 +1,5 @@
 from odoo.tests import TransactionCase
-from odoo.exceptions import UserError
 import re
-import logging
-
-_logger = logging.getLogger(__name__)
 
 
 class TestResPartner(TransactionCase):

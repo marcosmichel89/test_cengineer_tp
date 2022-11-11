@@ -1,10 +1,6 @@
 from odoo import models, fields, api, _
 from odoo.exceptions import UserError
 import re
-from validators import ValidationFailure
-import logging
-
-_logger = logging.getLogger(__name__)
 
 
 class ResPartner(models.Model):

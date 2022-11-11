@@ -1,8 +1,5 @@
 import odoo.http as http
 from odoo.http import request
-import logging
-
-_logger = logging.getLogger(__name__)
 
 
 class TableCompute(object):
