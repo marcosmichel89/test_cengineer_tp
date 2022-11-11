@@ -1,0 +1,103 @@
+<odoo>
+    <data>
+        <record id="res_partner_register_socials" model="ir.ui.view">
+            <field name="name">res.partner.register.socials</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='vat']" position="after">
+                    <field name="complete_profile"/>
+                    <table attrs="{'invisible': [('complete_profile','=',False)]}">
+                        <tr>
+                            <td>
+                                <img src='/cengineer_tp/static/src/img/complete.png' alt="complete_profile"
+                                     style="max-height: 45px;"/>
+                            </td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </xpath>
+
+                <xpath expr="//field[@name='category_id']" position="after">
+                    <field name="url_facebook"/>
+                    <field name="url_linkedin"/>
+                    <field name="url_twitter"/>
+                </xpath>
+
+                <xpath expr="//page[last()]" position="after">
+                    <page name="facebook" string="Facebook" attrs="{'invisible': [('url_facebook','=',False)]}">
+                        <group>
+                            <group>
+                                <div>
+                                    <span class="fa fa-3x fa-facebook-square" role="img" name="facebook_icon">
+                                    </span>
+                                </div>
+                            </group>
+                            <group></group>
+                        </group>
+                    </page>
+
+                    <page name="twitter" string="Twitter" attrs="{'invisible': [('url_twitter','=',False)]}">
+                        <group>
+                            <group>
+                                <div>
+                                    <span class="fa fa-3x fa-twitter-square" role="img" name="twitter_icon">
+                                    </span>
+                                </div>
+                            </group>
+                            <group></group>
+                        </group>
+                    </page>
+
+                    <page name="linkedin" string="LinkedIn" attrs="{'invisible': [('url_linkedin','=',False)]}">
+                        <group>
+                            <group>
+                                <div>
+                                    <span class="fa fa-3x fa-linkedin-square" role="img" name="linked_icon">
+                                    </span>
+                                </div>
+                            </group>
+                            <group></group>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="res_partner_tree_view" model="ir.ui.view">
+            <field name="name">res.partner.tree.view</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='display_name']" position="after">
+                    <field name="complete_profile"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="res_partner_kanban_view" model="ir.ui.view">
+            <field name="name">res.partner.kanban.view</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.res_partner_kanban_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[hasclass('o_kanban_tags_section')]" position="before">
+                    <field name="complete_profile" invisible="1"/>
+                    <span attrs="{'invisible': [('complete_profile','=',True)]}">Incomplete Profile</span>
+                    <span attrs="{'invisible': [('complete_profile','=',False)]}">Completed Profile</span>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_res_partner_incomplete_filter" model="ir.ui.view">
+            <field name="name">view.res.partner.incomplete.filter</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_res_partner_filter"/>
+            <field name="arch" type="xml">
+                <xpath expr="//search" position="inside">
+                    <filter name="incomplete" string="Incomplete Profile" domain="[('complete_profile', '=', False)]"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

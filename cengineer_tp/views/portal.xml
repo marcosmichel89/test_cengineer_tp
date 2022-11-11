@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="social_clients" name="Social Clients">
+        <t t-call="website.layout">
+            <t t-set="additional_title">Social</t>
+            <div id="wrap" class="js_sale">
+                <div class="oe_structure oe_empty" id="oe_structure_website_sale_products_1"/>
+                <div class="container oe_website_sale">
+                    <div class="products_pager form-inline flex-md-nowrap justify-content-between justify-content-md-center">
+
+                    </div>
+                    <div class="row o_wsale_products_main_row">
+                        <div t-if="enable_left_column" id="products_grid_before" class="col-lg-3"/>
+                        <div id="products_grid"
+                             t-attf-class="col #{'o_wsale_layout_list' if layout_mode == 'list' else ''}">
+                            <div t-if="bins" class="o_wsale_products_grid_table_wrapper">
+                                <table class="table table-borderless m-0" t-att-data-ppg="ppg" t-att-data-ppr="ppr">
+                                    <colgroup t-ignore="true">
+                                        <!-- Force the number of columns (useful when only one row of (x < ppr) products) -->
+                                        <col t-foreach="ppr" t-as="p"/>
+                                    </colgroup>
+                                    <tbody>
+                                        <tr t-foreach="bins" t-as="tr_clients">
+                                            <t t-foreach="tr_clients" t-as="td_client">
+                                                <t t-if="td_client">
+                                                    <t t-set="client" t-value="td_client['clients']"/>
+                                                    <td t-att-colspan="td_client['x'] != 1 and td_client['x']"
+                                                        t-att-rowspan="td_client['y'] != 1 and td_client['y']"
+                                                        t-attf-class="oe_product"
+                                                        t-att-data-ribbon-id="td_client['ribbon'].id">
+
+                                                        <div t-attf-class="o_wsale_product_grid_wrapper o_wsale_product_grid_wrapper_#{td_client['x']}_#{td_client['y']}">
+                                                            <form action="#" method="post"
+                                                                  class="card oe_product_cart"
+                                                                  t-att-data-publish="client.complete_profile and 'on' or 'off'"
+                                                                  itemscope="itemscope"
+                                                                  itemtype="http://schema.org/Product">
+                                                                <div class="card-body p-1 oe_product_image">
+                                                                    <a t-att-href="product_href" class="d-block h-100"
+                                                                       itemprop="url">
+                                                                        <span t-field="client.image_1920"
+                                                                              t-options="{'widget': 'image', 'preview_image': 'image_1024', 'itemprop': 'image'}"
+                                                                              class="d-flex h-100 justify-content-center align-items-center"/>
+                                                                    </a>
+                                                                </div>
+                                                                <div class="card-body p-0 text-center o_wsale_product_information">
+                                                                    <div class="p-2 o_wsale_product_information_text">
+                                                                        <h6 class="o_wsale_products_item_title">
+                                                                            <a itemprop="name" t-att-href="product_href"
+                                                                               t-att-content="client.name"
+                                                                               t-field="client.name"/>
+                                                                        </h6>
+                                                                        <a role="button"
+                                                                           t-if="client.complete_profile"
+                                                                           t-att-href="product_href"
+                                                                           class="btn btn-sm btn-success"
+                                                                           title="This profile is complete.">
+                                                                            Profile Complete
+                                                                        </a>
+                                                                        <br/>
+                                                                        <br/>
+                                                                        <div class="row btn-group" role="group">
+                                                                            <a t-attf-href="{{client.url_facebook}}"
+                                                                               class="btn border bg-white o_wslides_js_social_share"
+                                                                               social-key="facebook"
+                                                                               aria-label="Share on Facebook"
+                                                                               target="_blank"
+                                                                               title="My Facebook">
+                                                                                <i class="fa fa-facebook-square fa-fw text-facebook"/>
+                                                                            </a>
+                                                                            <a t-attf-href="{{client.url_twitter}}"
+                                                                               class="btn border bg-white o_wslides_js_social_share"
+                                                                               social-key="twitter"
+                                                                               aria-label="Share on Twitter"
+                                                                               target="_blank"
+                                                                               title="My Twitter">
+                                                                                <i class="fa fa-twitter fa-fw text-twitter"/>
+                                                                            </a>
+
+                                                                            <a t-attf-href="{{client.url_linkedin}}"
+                                                                               social-key="linkedin"
+                                                                               class="btn border bg-white"
+                                                                               aria-label="Share on LinkedIn"
+                                                                               target="_blank"
+                                                                               title="My LinkedIn">
+                                                                                <i class="fa fa-linkedin fa-fw text-linkedin"/>
+                                                                            </a>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                            <t t-set="product_image_big"
+                                                               t-value="td_client['x'] + td_client['y'] &gt; 2"/>
+                                                        </div>
+                                                    </td>
+                                                </t>
+                                            </t>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+</odoo>
